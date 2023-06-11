@@ -13,7 +13,7 @@ const Header: React.FC = () => {
             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
             <path d="M14 10a2 2 0 1 0 -4 0v4a2 2 0 1 0 4 0"></path>
           </svg>
-          <span>Calorie Calculator</span>
+          <span>Caloric</span>
         </Link>
       </h1>
       <a
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         target="_blank"
         rel="noopener"
       >
-        View Study
+        Study
       </a>
     </header>
   );

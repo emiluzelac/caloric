@@ -118,7 +118,7 @@ const Calculator: React.FC = () => {
         className="my-4"
         style={{ display: showResults ? 'none' : 'block' }}
       >
-        <h1 className="h1 mb-3 fw-normal">Resting Metabolic Rate Equation</h1>
+        <h1 className="h1 mb-3 fw-normal">Calorie Calculator</h1>
         <p>
           This TDEE calorie calculator improves the Harris-Benedict equations by
           creating and validating new equations to estimate resting metabolic
@@ -134,11 +134,11 @@ const Calculator: React.FC = () => {
             onChange={(e) => setSex(e.target.value)}
             required
           >
-            <option value="">-Select-</option>
+            <option value="Choose..."></option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-          <label htmlFor="sex">Sex</label>
+          <label htmlFor="sex">Gender</label>
         </div>
         <div className="form-floating mb-3">
           <input
