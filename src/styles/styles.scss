@@ -5,24 +5,24 @@
 @import 'bootstrap/scss/functions';
 
 // Change variables here
-@import 'styles/volt/variables';
+@import 'volt/variables';
 
 // Vendor
-@import 'styles/volt/vendor';
+@import 'volt/vendor';
 
 // volt mixins & functions
-@import 'styles/volt/mixins';
-@import 'styles/volt/functions';
+@import 'volt/mixins';
+@import 'volt/functions';
 
 // Utilities
-@import 'styles/volt/reboot';
-@import 'styles/volt/utilities';
+@import 'volt/reboot';
+@import 'volt/utilities';
 
 // Layout
-@import 'styles/volt/layout';
+@import 'volt/layout';
 
 // Components
-@import 'styles/volt/components';
+@import 'volt/components';
 
 // write your custom styles here!
 
