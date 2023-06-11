@@ -276,7 +276,7 @@ const Calculator: React.FC = () => {
               activity level:
             </p>
           </div>
-          <div className="row row-cols-4 row-cols-md-2 g-4">
+          <div className="row row-cols-1 row-cols-md-2 g-4">
             <div className="col">
               <div className="card">
                 <div className="card-header">
