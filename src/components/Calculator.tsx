@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Calculator = () => {
+const Calculator: React.FC = () => {
   const [sex, setSex] = useState('');
   const [age, setAge] = useState('');
   const [heightFt, setHeightFt] = useState('');
@@ -48,11 +48,11 @@ const Calculator = () => {
     setFormSubmitted(true);
   };
 
-  const isInvalid = (value) => {
+  const isInvalid = (value: string) => {
     return formSubmitted && (!value || value.trim() === '');
   };
 
-  const getActivityLevelName = (value) => {
+  const getActivityLevelName = (value: string) => {
     switch (value) {
       case '1.2':
         return 'sedentary';
