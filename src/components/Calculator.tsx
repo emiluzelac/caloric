@@ -237,7 +237,7 @@ const Calculator: React.FC = () => {
             </div>
           ))}
         </div>
-        <button className="w-100 btn btn-primary" onClick={calculate}>
+        <button className="w-100 btn btn-primary btn-lg" onClick={calculate}>
           Calculate
         </button>
       </div>
