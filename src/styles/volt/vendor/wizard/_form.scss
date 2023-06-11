@@ -129,7 +129,6 @@
                 + span {
                     display: inline-block;
                     position: relative;
-                    font-weight: 600;
     
                     &:before {
                         content: '';
@@ -211,7 +210,6 @@
                -webkit-transition: all .3s ease;
                transition: all .3s ease;
                border-radius: 4px;
-               font-weight: 600;
             }
         }
     
