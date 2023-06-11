@@ -1,0 +1,10 @@
+// Variable overrides first
+$body-bg: #f8fafa;
+$body-color: #031a33;
+$border-radius: 0.2rem;
+$btn-border-radius: 0.2rem;
+$input-color: #202c5e;
+$input-bg: #fff;
+$white: #fff;
+
+@import 'bootstrap/scss/bootstrap.scss';
