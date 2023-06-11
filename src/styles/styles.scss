@@ -1,12 +1,29 @@
-// Variable overrides first
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800&display=swap');
 
-$body-color: #031a33;
-$border-radius: 0.2rem;
-$btn-border-radius: 0.2rem !default;
-$btn-border-radius-sm: 0.2rem !default;
-$btn-border-radius-lg: 0.2rem !default;
-$input-color: #202c5e;
-$input-bg: #fff;
-$white: #fff;
+// Bootstrap mixins and functions
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/functions';
+
+// Change variables here
+@import 'styles/volt/variables';
+
+// Vendor
+@import 'styles/volt/vendor';
+
+// volt mixins & functions
+@import 'styles/volt/mixins';
+@import 'styles/volt/functions';
+
+// Utilities
+@import 'styles/volt/reboot';
+@import 'styles/volt/utilities';
+
+// Layout
+@import 'styles/volt/layout';
+
+// Components
+@import 'styles/volt/components';
+
+// write your custom styles here!
 
 @import 'bootstrap/scss/bootstrap.scss';
