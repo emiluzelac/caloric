@@ -134,7 +134,7 @@ const Calculator: React.FC = () => {
             onChange={(e) => setSex(e.target.value)}
             required
           >
-            <option value="Choose..."></option>
+            <option value="">Choose...</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
