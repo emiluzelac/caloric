@@ -148,6 +148,7 @@ const Calculator: React.FC = () => {
             placeholder="Age"
             value={age}
             onChange={(e) => setAge(e.target.value)}
+            pattern="[0-9]*"
             required
           />
           <label htmlFor="age">Age</label>
@@ -162,6 +163,7 @@ const Calculator: React.FC = () => {
             placeholder="Height (ft)"
             value={heightFt}
             onChange={(e) => setHeightFt(e.target.value)}
+            pattern="[0-9]*"
             required
           />
           <label htmlFor="heightFt">Height (ft)</label>
@@ -176,6 +178,7 @@ const Calculator: React.FC = () => {
             placeholder="Height (in)"
             value={heightIn}
             onChange={(e) => setHeightIn(e.target.value)}
+            pattern="[0-9]*"
             required
           />
           <label htmlFor="heightIn">Height (in)</label>
@@ -190,6 +193,7 @@ const Calculator: React.FC = () => {
             placeholder="Weight (lbs)"
             value={weightLbs}
             onChange={(e) => setWeightLbs(e.target.value)}
+            pattern="[0-9]*"
             required
           />
           <label htmlFor="weightLbs">Weight (lbs)</label>
