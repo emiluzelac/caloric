@@ -18,7 +18,7 @@ const Header: React.FC = () => {
       </h1>
       <a
         href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9967803/"
-        className="btn btn-sm btn-secondary d-inline-flex align-items-center"
+        className="text text-info d-inline-flex align-items-center"
         target="_blank"
         rel="noopener"
       >
