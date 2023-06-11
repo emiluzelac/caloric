@@ -9,4 +9,7 @@ $input-color: #202c5e;
 $input-bg: #fff;
 $white: #fff;
 
+$primary: map-get($tw_indigo, 900);
+
+@import 'tailwind-color-palette/scss/tailwind-color-palette';
 @import 'bootstrap/scss/bootstrap.scss';
