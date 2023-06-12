@@ -120,7 +120,7 @@ const Calculator: React.FC = () => {
       >
         <div className='card'>
         <div className='card-header text-bg-light'>
-        <p className="card-title">Calorie Calculator</p>
+        <h5 className="card-title">Calorie Calculator</h5>
         <p className='card-text'>
           This TDEE calorie calculator improves the Harris-Benedict equations by
           creating and validating new equations to estimate resting metabolic
@@ -205,7 +205,7 @@ const Calculator: React.FC = () => {
         </div>
   
         <div className="card-footer">
-          <p className="card-title">Activity Level</p>
+          <h5 className="card-title">Activity Level</h5>
           {[
             { value: '1.2', label: 'Sedentary (little or no exercise)' },
             {
@@ -281,7 +281,7 @@ const Calculator: React.FC = () => {
             Start Over
           </button>
           <div className="mb-3">
-            <h1>Results</h1>
+            <h5>Results</h5>
             <p className="lead">
               Your results for {getActivityLevelName(selectedActivityLevel)}{' '}
               activity level:
