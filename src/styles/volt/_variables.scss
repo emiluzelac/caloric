@@ -775,7 +775,7 @@ $form-text-color:                       $text-muted;
 $form-label-margin-bottom:              .5rem;
 $form-label-font-size:                  null;
 $form-label-font-style:                 null;
-$form-label-font-weight:                $font-weight-normal;
+$form-label-font-weight:                $font-weight-normal !default;
 $form-label-color:                      null;
 
 $input-padding-y:                       $input-btn-padding-y;
