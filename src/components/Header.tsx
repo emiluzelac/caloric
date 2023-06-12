@@ -8,7 +8,7 @@ const Header: React.FC = () => {
           href="/"
           className="d-flex align-items-center text-dark text-decoration-none"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="me-2" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
             <path d="M14 10a2 2 0 1 0 -4 0v4a2 2 0 1 0 4 0"></path>
@@ -18,7 +18,7 @@ const Header: React.FC = () => {
       </h1>
       <a
         href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9967803/"
-        className="text text-info d-inline-flex align-items-center"
+        className="btn btn-sm btn-outline-secondary d-inline-flex align-items-center"
         target="_blank"
         rel="noopener"
       >

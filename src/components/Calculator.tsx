@@ -119,7 +119,7 @@ const Calculator: React.FC = () => {
         style={{ display: showResults ? 'none' : 'block' }}
       >
         <div className='col'>
-        <h2>Calorie Calculator</h2>
+        <h2 className='fs-3 text-body-emphasis'>Calorie Calculator</h2>
         <p>
           This TDEE calorie calculator improves the Harris-Benedict equations by
           creating and validating new equations to estimate resting metabolic
@@ -207,7 +207,7 @@ const Calculator: React.FC = () => {
         
   
         <div className="col">
-          <h3 className='mb-3'>Activity Level</h3>
+          <h3 className='fs-3 text-body-emphasis mb-3'>Activity Level</h3>
           {[
             { value: '1.2', label: 'Sedentary (little or no exercise)' },
             {
