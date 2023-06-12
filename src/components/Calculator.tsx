@@ -115,10 +115,10 @@ const Calculator: React.FC = () => {
     <>
       <div
         id="formSection"
-        className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5"
+        className="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary"
         style={{ display: showResults ? 'none' : 'block' }}
       >
-        <div className='card col-md-6'>
+        <div className='card col'>
         <div className='card-header'>
         <h2 className="card-title">Calorie Calculator</h2>
         <p className='card-text'>
