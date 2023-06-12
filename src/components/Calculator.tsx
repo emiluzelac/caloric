@@ -393,7 +393,7 @@ const Calculator: React.FC = () => {
               </div>
             </div>
 
-            <div className="d-flex justify-content-between mt-2">
+            <div className="d-flex gap-2 justify-content-center py-5">
               <span
                 className={parseFloat(bmi) < 18.5 ? 'badge bg-primary-subtle text-primary-emphasis rounded-pill' : ''}
               >
