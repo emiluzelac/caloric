@@ -1,8 +1,8 @@
-import Head from 'next/head';
-import Container from 'react-bootstrap/Container';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import Calculator from '@/components/Calculator';
+import Head from "next/head";
+import Container from "react-bootstrap/Container";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Calculator from "@/components/Calculator";
 
 export default function Home() {
   return (
