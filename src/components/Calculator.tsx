@@ -118,17 +118,15 @@ const Calculator: React.FC = () => {
         className="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary"
         style={{ display: showResults ? 'none' : 'block' }}
       >
-        <div className='card col'>
-        <div className='card-header'>
-        <h2 className="card-title">Calorie Calculator</h2>
-        <p className='card-text'>
+        <div className='col'>
+        <h2>Calorie Calculator</h2>
+        <p>
           This TDEE calorie calculator improves the Harris-Benedict equations by
           creating and validating new equations to estimate resting metabolic
           rate (RMR) in adults of various weights using the same anthropometric
           factors.
         </p>
-        </div>
-        <div className='card-body'>
+
         <div className="form-floating mb-3">
           <select
             id="sex"
@@ -144,6 +142,7 @@ const Calculator: React.FC = () => {
           </select>
           <label htmlFor="sex">Gender</label>
         </div>
+
         <div className="form-floating mb-3">
           <input
             type="number"
@@ -157,6 +156,7 @@ const Calculator: React.FC = () => {
           />
           <label htmlFor="age">Age</label>
         </div>
+
         <div className="form-floating mb-3">
           <input
             type="number"
@@ -172,6 +172,7 @@ const Calculator: React.FC = () => {
           />
           <label htmlFor="heightFt">Height (ft)</label>
         </div>
+
         <div className="form-floating mb-3">
           <input
             type="number"
@@ -187,6 +188,7 @@ const Calculator: React.FC = () => {
           />
           <label htmlFor="heightIn">Height (in)</label>
         </div>
+
         <div className="form-floating mb-3">
           <input
             type="number"
@@ -202,7 +204,7 @@ const Calculator: React.FC = () => {
           />
           <label htmlFor="weightLbs">Weight (lbs)</label>
         </div>
-        </div>
+        
   
         <div className="card-footer">
           <h3>Activity Level</h3>
@@ -251,7 +253,7 @@ const Calculator: React.FC = () => {
           Calculate
         </button>
         </div>
-      </div>
+        </div>
       {showResults && (
         <div id="resultsSection" className="my-5">
           <button
