@@ -1,6 +1,6 @@
 const Footer: React.FC = () => {
   return (
-    <footer className="footer py-6 bg-gray-800 text-white">
+    <footer className="footer">
       <hr className="mt-5 mb-4" />
       <span className=" text-center text-md">
         Created and opened sourced by{' '}

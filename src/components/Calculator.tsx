@@ -125,6 +125,8 @@ const Calculator: React.FC = () => {
           rate (RMR) in adults of various weights using the same anthropometric
           factors.
         </p>
+        <div className='card'>
+        <div className='card-body'>
         <div className="form-floating mb-3">
           <select
             id="sex"
@@ -198,7 +200,9 @@ const Calculator: React.FC = () => {
           />
           <label htmlFor="weightLbs">Weight (lbs)</label>
         </div>
-        <div className="my-5">
+        </div>
+  
+        <div className="card-footer my-5">
           <h2 className="h2 mb-3 fw-normal text-dark">Activity Level</h2>
           {[
             { value: '1.2', label: 'Sedentary (little or no exercise)' },
@@ -241,6 +245,7 @@ const Calculator: React.FC = () => {
             </div>
           ))}
         </div>
+        </div>
         <button className="w-100 btn btn-primary btn-lg" onClick={calculate}>
           Calculate
         </button>
@@ -248,12 +253,12 @@ const Calculator: React.FC = () => {
       {showResults && (
         <div id="resultsSection" className="my-5">
           <button
-            className="btn btn-sm btn-gray-200 d-inline-flex align-items-center py-1 ps-3 text-start"
+            className="btn btn-sm btn-gray-500 d-inline-flex align-items-center py-1 ps-3 text-start"
             onClick={resetCalculator}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-xxs text-gray-500 me-2"
+              className="icon icon-xxs text-dark me-2"
               width="18"
               height="18"
               viewBox="0 0 24 24"
