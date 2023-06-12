@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800");
 
-// Dark theme variables
+// Light theme variables
 
 // Bootstrap base colors
 $white: #fff !default;
@@ -110,8 +110,8 @@ $position-values: (
 // Body
 //
 // Settings for the `<body>` element.
-$body-bg: #070d19 !default;
-$body-color: #d0d6e1 !default;
+$body-bg: #f9fafb !default;
+$body-color: $black !default;
 
 // Links
 //
@@ -132,7 +132,7 @@ $grid-gutter-width: 1.5rem !default;
 // Define common padding and border radius sizes and more.
 
 // Border
-$border-color: #172340 !default;
+$border-color: $gray-200 !default;
 
 // Border Radiues
 $border-radius: 0.25rem !default;
@@ -182,9 +182,9 @@ $table-cell-padding-x: 0.85rem !default;
 $table-cell-padding-y-sm: 0.55rem !default;
 $table-cell-padding-x-sm: 0.55rem !default;
 
-$table-striped-bg: #080e1b !default;
-$table-active-bg: #050913 !default;
-$table-hover-bg: #080e1b !default;
+$table-striped-bg: $gray-200 !default;
+$table-active-bg: $gray-300 !default;
+$table-hover-bg: $gray-200 !default;
 
 $table-group-separator-color: $border-color;
 
@@ -233,10 +233,9 @@ $input-padding-y-xs: $input-btn-padding-y-xs !default;
 $input-padding-x-xs: $input-btn-padding-x-xs !default;
 $input-font-size-xs: $input-btn-font-size-xs !default;
 
-$input-bg: #0c1427 !default;
-$input-disabled-bg: lighten($input-bg, 5%) !default; // dark
+$input-bg: $white !default;
 $input-border-color: $border-color !default;
-$input-focus-border-color: lighten($border-color, 10%) !default;
+$input-focus-border-color: $gray-400 !default;
 
 $input-border-radius: $btn-border-radius !default;
 $input-border-radius-sm: $btn-border-radius-sm !default;
@@ -244,42 +243,23 @@ $input-border-radius-lg: $btn-border-radius-lg !default;
 
 // form-check
 $form-check-input-width: 1.3em !default;
-$form-check-input-border: 1px solid lighten($input-border-color, 20%) !default; // dark
-$form-check-input-focus-border: lighten(
-  $input-border-color,
-  25%
-) !default; // dark
 $form-check-input-border-radius: 0.15em !default;
-
-// Form switch
-$form-switch-color: lighten($input-bg, 60%) !default; // dark
-$form-switch-focus-color: lighten($input-bg, 65%) !default; // dark
 
 // Form select
 $form-select-indicator-color: $gray-600 !default;
 
 // Input-group
 $input-group-addon-padding-x: 0.563rem !default;
-$input-group-addon-bg: lighten($input-bg, 5%) !default;
-
-// Range
-$form-range-track-bg: lighten($input-bg, 5%) !default; // dark
+$input-group-addon-bg: $gray-100 !default;
 
 // Navs
-$nav-tabs-border-color: $border-color !default; // dark
-$nav-tabs-link-bg: transparent; // custom variable
-$nav-tabs-link-border-color: $border-color $border-color $nav-tabs-border-color; // custom variable
-$nav-tabs-link-active-bg: $input-bg !default;
-$nav-tabs-link-active-border-color: $border-color $border-color
-  $nav-tabs-link-active-bg !default; //dark
+$nav-tabs-link-bg: $gray-100; // custom variable
+$nav-tabs-link-border-color: $border-color $border-color $gray-300; // custom variable
+$nav-tabs-link-active-bg: $white;
 
 // Dropdowns
-$dropdown-font-size: 13px !default; // dark
-$dropdown-color: $body-color !default; // dark
-$dropdown-bg: $gray-900 !default; // dark
-$dropdown-border-color: $border-color;
-$dropdown-box-shadow: 0 0 10px 0 #060b15;
-$dropdown-link-color: $body-color !default; // dark
+$dropdown-border-color: #f2f4f9;
+$dropdown-box-shadow: 0 5px 10px 0 rgba(183, 192, 206, 0.2);
 
 // Pagination
 $pagination-padding-y: 0.469rem !default;
@@ -288,79 +268,49 @@ $pagination-padding-y-sm: 0.391rem !default;
 $pagination-padding-x-sm: 0.75rem !default;
 $pagination-padding-y-lg: 0.5rem !default;
 $pagination-padding-x-lg: 1.1rem !default;
-
-$pagination-color: $primary !default;
-$pagination-bg: $input-bg !default; // dark
-$pagination-border-color: $border-color !default; // dark
-
-$pagination-focus-bg: lighten($input-bg, 10%) !default; // dark
-
-$pagination-hover-bg: lighten($input-bg, 10%); // dark
-$pagination-hover-border-color: lighten($input-bg, 10%); // dark
-
-$pagination-active-bg: $primary !default;
-$pagination-active-border-color: $primary !default;
-
-$pagination-disabled-color: $gray-700 !default; // dark
-$pagination-disabled-bg: $input-bg !default; // dark
-$pagination-disabled-border-color: $border-color !default; // dark
+$pagination-color: $primary;
+$pagination-active-bg: $primary;
+$pagination-active-border-color: $primary;
 
 // Cards
-$card-box-shadow: 3px 0 10px 0 #060b15; // custom variable
+$card-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2); // custom variable
 $card-spacer-y: 1.5rem !default;
 $card-spacer-x: 1.5rem !default;
 $card-title-spacer-y: 0.875rem !default;
-$card-border-color: #172340 !default;
+$card-border-color: #f2f4f9 !default;
 $card-cap-padding-y: 0.875rem !default;
 $card-cap-padding-x: $card-spacer-x !default;
-$card-cap-bg: #0a1122 !default;
-$card-bg: #0c1427 !default; // dark
+$card-cap-bg: rgba($black, 0.01) !default;
 
 // Accordion
-$accordion-bg: $input-bg !default;
+$accordion-bg: $white !default;
 $accordion-border-color: $border-color !default;
 $accordion-icon-width: 0.875rem !default;
-$accordion-button-active-bg: lighten($input-bg, 5%) !default; // dark
 
 // Popovers
-$popover-bg: $input-bg !default; // dark
 $popover-border-color: $border-color !default;
-$popover-header-bg: lighten($input-bg, 5%) !default;
+$popover-header-bg: $gray-200 !default;
 
 // Badges
 $badge-font-size: 0.8em !default;
 $badge-font-weight: $font-weight-bold !default;
 
 // Modals
-$modal-content-bg: $input-bg !default; //dark
 $modal-content-border-color: $border-color !default;
 $modal-fade-transform: scale(0.8) !default;
 $modal-transition: transform 0.4s ease !default;
 // Modals
 
-// Progress bars
-$progress-bg: lighten($input-bg, 5%) !default; // dark
-
 // List group
-$list-group-color: $body-color !default; // dark
-$list-group-bg: $input-bg !default; // dark
-$list-group-border-color: $border-color !default; // dark
-
 $list-group-item-padding-y: 0.75rem !default;
 $list-group-item-padding-x: 1.25rem !default;
 
-$list-group-hover-bg: lighten($input-bg, 5%); // dark
-$list-group-action-color: $gray-400 !default; // dark
-
 // Close
 $btn-close-width: 0.8em !default;
-$btn-close-color: $text-muted !default;
-
-// Sidebar
-$sidebar-width-lg: 240px;
-$sidebar-folded-width: 70px;
+$btn-close-color: $black !default;
 
 // Navbar
 $navbar-height: 60px;
+$navbar-dark-bg: #0c1427;
 
 @import "bootstrap/scss/bootstrap.scss";
