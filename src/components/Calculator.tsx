@@ -289,7 +289,7 @@ const Calculator: React.FC = () => {
           </div>
           <div className="row row-cols-1 row-cols-md-2 g-4">
             <div className="col">
-              <div className="card">
+              <div className="card h-100">
                 <div className="card-header">
                   <h4 className="my-0 fw-normal">RMR</h4>
                 </div>
@@ -311,7 +311,7 @@ const Calculator: React.FC = () => {
               </div>
             </div>
             <div className="col">
-              <div className="card">
+              <div className="card h-100">
                 <div className="card-header">
                   <h4 className="my-0 fw-normal">Maintenance</h4>
                 </div>
@@ -331,7 +331,7 @@ const Calculator: React.FC = () => {
               </div>
             </div>
             <div className="col">
-              <div className="card">
+              <div className="card h-100">
                 <div className="card-header">
                   <h4 className="my-0 fw-normal">Weight Loss</h4>
                 </div>
@@ -350,7 +350,7 @@ const Calculator: React.FC = () => {
               </div>
             </div>
             <div className="col">
-              <div className="card">
+              <div className="card h-100">
                 <div className="card-header">
                   <h4 className="my-0 fw-normal">Weight Gain</h4>
                 </div>
@@ -395,14 +395,14 @@ const Calculator: React.FC = () => {
 
             <div className="d-flex justify-content-between mt-2">
               <span
-                className={parseFloat(bmi) < 18.5 ? 'text-primary fw-bold' : ''}
+                className={parseFloat(bmi) < 18.5 ? 'badge rounded-pill text-bg-primary' : ''}
               >
                 Underweight
               </span>
               <span
                 className={
                   parseFloat(bmi) >= 18.5 && parseFloat(bmi) < 25
-                    ? 'text-success fw-bold'
+                    ? 'badge rounded-pill text-bg-secondary'
                     : ''
                 }
               >
@@ -411,14 +411,14 @@ const Calculator: React.FC = () => {
               <span
                 className={
                   parseFloat(bmi) >= 25 && parseFloat(bmi) < 30
-                    ? 'text-warning fw-bold'
+                    ? 'badge rounded-pill text-bg-warning'
                     : ''
                 }
               >
                 Overweight
               </span>
               <span
-                className={parseFloat(bmi) >= 30 ? 'text-danger fw-bold' : ''}
+                className={parseFloat(bmi) >= 30 ? 'badge rounded-pill text-bg-danger' : ''}
               >
                 Obesity
               </span>
