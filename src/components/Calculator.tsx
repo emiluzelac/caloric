@@ -206,8 +206,8 @@ const Calculator: React.FC = () => {
         </div>
         
   
-        <div className="card-footer">
-          <h3>Activity Level</h3>
+        <div className="col">
+          <h3 className='mb-3'>Activity Level</h3>
           {[
             { value: '1.2', label: 'Sedentary (little or no exercise)' },
             {
