@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
           Emil Uzelac
         </a>
       </span>
-      <span className="badge bg-info">v1.0.0</span>
+      <span className="badge bg-dark-subtle text-dark-emphasis rounded-pill">v1.0.0</span>
     </footer>
   );
 };
