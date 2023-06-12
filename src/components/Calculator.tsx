@@ -115,12 +115,12 @@ const Calculator: React.FC = () => {
     <>
       <div
         id="formSection"
-        className="my-4"
+        className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5"
         style={{ display: showResults ? 'none' : 'block' }}
       >
-        <div className='card'>
-        <div className='card-header text-bg-light'>
-        <h5 className="card-title">Calorie Calculator</h5>
+        <div className='card col-md-6'>
+        <div className='card-header'>
+        <h2 className="card-title">Calorie Calculator</h2>
         <p className='card-text'>
           This TDEE calorie calculator improves the Harris-Benedict equations by
           creating and validating new equations to estimate resting metabolic
@@ -205,7 +205,7 @@ const Calculator: React.FC = () => {
         </div>
   
         <div className="card-footer">
-          <h5 className="card-title">Activity Level</h5>
+          <h3>Activity Level</h3>
           {[
             { value: '1.2', label: 'Sedentary (little or no exercise)' },
             {
@@ -255,7 +255,7 @@ const Calculator: React.FC = () => {
       {showResults && (
         <div id="resultsSection" className="my-5">
           <button
-            className="btn btn-sm btn-gray-500 d-inline-flex align-items-center py-1 ps-3 text-start"
+            className="btn btn-sm btn-gray-500 d-inline-flex align-items-center py-1 text-start"
             onClick={resetCalculator}
           >
             <svg
@@ -393,7 +393,7 @@ const Calculator: React.FC = () => {
               </div>
             </div>
 
-            <div className="d-flex gap-2 justify-content-center py-5">
+            <div className="d-flex justify-content-evenly gap-2">
               <span
                 className={parseFloat(bmi) < 18.5 ? 'badge bg-primary-subtle text-primary-emphasis rounded-pill' : ''}
               >
