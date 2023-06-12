@@ -395,14 +395,14 @@ const Calculator: React.FC = () => {
 
             <div className="d-flex justify-content-between mt-2">
               <span
-                className={parseFloat(bmi) < 18.5 ? 'badge rounded-pill text-bg-primary' : ''}
+                className={parseFloat(bmi) < 18.5 ? 'badge bg-info' : ''}
               >
                 Underweight
               </span>
               <span
                 className={
                   parseFloat(bmi) >= 18.5 && parseFloat(bmi) < 25
-                    ? 'badge rounded-pill text-bg-secondary'
+                    ? 'badge bg-success'
                     : ''
                 }
               >
@@ -411,14 +411,14 @@ const Calculator: React.FC = () => {
               <span
                 className={
                   parseFloat(bmi) >= 25 && parseFloat(bmi) < 30
-                    ? 'badge rounded-pill text-bg-warning'
+                    ? 'badge bg-warning'
                     : ''
                 }
               >
                 Overweight
               </span>
               <span
-                className={parseFloat(bmi) >= 30 ? 'badge rounded-pill text-bg-danger' : ''}
+                className={parseFloat(bmi) >= 30 ? 'badge bg-danger' : ''}
               >
                 Obesity
               </span>
