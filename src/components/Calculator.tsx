@@ -249,7 +249,7 @@ const Calculator: React.FC = () => {
             </div>
           ))}
         </div>
-        <button className="btn btn-primary w-100 py-2" onClick={calculate}>
+        <button className="btn btn-primary w-100 my-2 py-2" onClick={calculate}>
           Calculate
         </button>
         </div>
@@ -257,7 +257,7 @@ const Calculator: React.FC = () => {
       {showResults && (
         <div id="resultsSection" className="my-5">
           <button
-            className="icon-link"
+            className="btn btn-primary my-2 py-1"
             onClick={resetCalculator}
           >
             <svg
