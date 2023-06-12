@@ -115,7 +115,7 @@ const Calculator: React.FC = () => {
     <>
       <div
         id="formSection"
-        className="card my-4"
+        className="my-4"
         style={{ display: showResults ? 'none' : 'block' }}
       >
         <h1 className="h1 mb-3 fw-normal">Calorie Calculator</h1>
@@ -248,12 +248,12 @@ const Calculator: React.FC = () => {
       {showResults && (
         <div id="resultsSection" className="my-5">
           <button
-            className="btn btn-sm btn-gray-200 d-inline-flex align-items-center mb-3"
+            className="btn btn-sm btn-gray-200 d-inline-flex align-items-center py-1 ps-3 text-start"
             onClick={resetCalculator}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="me-2"
+              className="icon icon-xxs text-gray-500 me-2"
               width="18"
               height="18"
               viewBox="0 0 24 24"
