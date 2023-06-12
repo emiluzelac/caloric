@@ -119,9 +119,9 @@ const Calculator: React.FC = () => {
         style={{ display: showResults ? 'none' : 'block' }}
       >
         <div className='card'>
-        <div className='card-header'>
-        <h1 className="h1 mb-3 fw-normal">Calorie Calculator</h1>
-        <p>
+        <div className='card-header text-bg-light'>
+        <p className="card-title">Calorie Calculator</p>
+        <p className='card-text'>
           This TDEE calorie calculator improves the Harris-Benedict equations by
           creating and validating new equations to estimate resting metabolic
           rate (RMR) in adults of various weights using the same anthropometric
@@ -205,7 +205,7 @@ const Calculator: React.FC = () => {
         </div>
   
         <div className="card-footer">
-          <h2 className="card-title">Activity Level</h2>
+          <p className="card-title">Activity Level</p>
           {[
             { value: '1.2', label: 'Sedentary (little or no exercise)' },
             {
