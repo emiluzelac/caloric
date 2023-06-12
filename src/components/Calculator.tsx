@@ -202,8 +202,8 @@ const Calculator: React.FC = () => {
         </div>
         </div>
   
-        <div className="card-footer my-5">
-          <h2 className="h2 mb-3 fw-normal text-dark">Activity Level</h2>
+        <div className="card-footer">
+          <h2 className="card-title">Activity Level</h2>
           {[
             { value: '1.2', label: 'Sedentary (little or no exercise)' },
             {
@@ -245,10 +245,10 @@ const Calculator: React.FC = () => {
             </div>
           ))}
         </div>
-        </div>
         <button className="w-100 btn btn-primary btn-lg" onClick={calculate}>
           Calculate
         </button>
+        </div>
       </div>
       {showResults && (
         <div id="resultsSection" className="my-5">
