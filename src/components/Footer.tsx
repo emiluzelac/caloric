@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         </a>
       </span>
       <span className="badge bg-dark-subtle text-dark-emphasis rounded-pill">
-        v1.0.0
+        v0.1.0
       </span>
     </footer>
   )
