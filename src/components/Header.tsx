@@ -29,7 +29,7 @@ const Header: React.FC = () => {
       </h1>
       <a
         href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9967803/"
-        className="btn btn-sm btn-outline-light d-inline-flex align-items-center"
+        className="btn btn-sm btn-light d-inline-flex align-items-center"
         target="_blank"
         rel="noopener"
       >

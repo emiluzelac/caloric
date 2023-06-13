@@ -32,8 +32,8 @@ $cyan: #0dcaf0 !default;
 //
 $primary: #422afb !default;
 $secondary: #f5f7fe !default;
-$success: #28C55D !default;
-$info: #83D9F6 !default;
+$success: #28c55d !default;
+$info: #83d9f6 !default;
 $warning: #f87316 !default;
 $danger: #f53a39 !default;
 $light: #a3aed0 !default;
@@ -273,7 +273,7 @@ $card-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2); // custom variable
 $card-spacer-y: 1.5rem !default;
 $card-spacer-x: 1.5rem !default;
 $card-title-spacer-y: 0.875rem !default;
-$card-border-color: #666 !default;
+$card-border-color: #e9ecef !default;
 $card-cap-padding-y: 0.875rem !default;
 $card-cap-padding-x: $card-spacer-x !default;
 $card-cap-bg: rgba($black, 0.01) !default;
@@ -283,6 +283,9 @@ $card-bg: #fff !default;
 $accordion-bg: $white !default;
 $accordion-border-color: $border-color !default;
 $accordion-icon-width: 0.875rem !default;
+
+// Progress bars
+$progress-bar-bg: $body-bg !default;
 
 // Popovers
 $popover-border-color: $border-color !default;
@@ -296,7 +299,6 @@ $badge-font-weight: $font-weight-bold !default;
 $modal-content-border-color: $border-color !default;
 $modal-fade-transform: scale(0.8) !default;
 $modal-transition: transform 0.4s ease !default;
-// Modals
 
 // List group
 $list-group-item-padding-y: 0.75rem !default;
