@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800");
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800');
 
 // Light theme variables
 
@@ -43,18 +43,18 @@ $dark: $gray-900 !default;
 
 // Social colors
 $social-colors: (
-  "facebook": #3b5998,
-  "twitter": #1da1f2,
-  "google": #dc4e41,
-  "youtube": #f00,
-  "vimeo": #1ab7ea,
-  "dribbble": #ea4c89,
-  "github": #181717,
-  "instagram": #e4405f,
-  "pinterest": #bd081c,
-  "flickr": #0063dc,
-  "bitbucket": #0052cc,
-  "linkedin": #0077b5,
+  'facebook': #3b5998,
+  'twitter': #1da1f2,
+  'google': #dc4e41,
+  'youtube': #f00,
+  'vimeo': #1ab7ea,
+  'dribbble': #ea4c89,
+  'github': #181717,
+  'instagram': #e4405f,
+  'pinterest': #bd081c,
+  'flickr': #0063dc,
+  'bitbucket': #0052cc,
+  'linkedin': #0077b5,
 ) !default;
 
 // The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
@@ -145,7 +145,7 @@ $action-transition-timing-function: ease;
 // Font, line-height, and color for body text, headings, and more.
 
 // Font family
-$font-family-sans-serif: "Archivo", sans-serif !default;
+$font-family-sans-serif: 'Archivo', sans-serif !default;
 
 $font-size-base: 0.875rem !default; // 14px
 $font-size-lg: 1rem !default; // 16px
@@ -313,4 +313,4 @@ $btn-close-color: $black !default;
 $navbar-height: 60px;
 $navbar-dark-bg: #0c1427;
 
-@import "bootstrap/scss/bootstrap.scss";
+@import 'bootstrap/scss/bootstrap.scss';

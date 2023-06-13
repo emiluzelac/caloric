@@ -3,10 +3,10 @@ const Footer: React.FC = () => {
     <footer className="footer">
       <hr className="mt-5 mb-4" />
       <span className="text-center text-md me-2">
-        Created and opened sourced by{" "}
+        Created and opened sourced by{' '}
         <a
           href="https://github.com/emiluzelac"
-          className="text text-info"
+          className="text-muted"
           target="_blank"
           rel="noopener"
         >
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
         v1.0.0
       </span>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

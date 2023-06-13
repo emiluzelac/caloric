@@ -50,5 +50,3 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 - [Revised Harris-Benedict Equation: New Human Resting Metabolic Rate Equation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9967803/): The research article detailing the revised Harris-Benedict equations.
 
 ---
-
-Feel free to customize this README file to suit your specific project.

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 const Header: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const Header: React.FC = () => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="btn btn-primary py-2 d-flex align-items-center"
+            className="me-2"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -29,14 +29,14 @@ const Header: React.FC = () => {
       </h1>
       <a
         href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9967803/"
-        className="btn btn-sm btn-outline-secondary d-inline-flex align-items-center"
+        className="btn btn-sm btn-outline-light d-inline-flex align-items-center"
         target="_blank"
         rel="noopener"
       >
         Study
       </a>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
