@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700;900&display=swap');
 
 // Light theme variables
 
@@ -30,7 +30,7 @@ $cyan: #0dcaf0 !default;
 
 // --- Bootstrap Theme Colors --- //
 //
-$primary: #6571ff !default;
+$primary: #000 !default;
 $secondary: $gray-600 !default;
 $success: #05a34a !default;
 $info: #66d1d1 !default;
@@ -119,11 +119,6 @@ $body-color: $black !default;
 $link-decoration: none !default;
 // $link-hover-decoration:        underline !default;
 
-// Paragraphs
-//
-// Style p element.
-$paragraph-margin-bottom: 0 !default;
-
 // Grid columns
 $grid-gutter-width: 1.5rem !default;
 
@@ -134,7 +129,7 @@ $grid-gutter-width: 1.5rem !default;
 // Border
 $border-color: $gray-200 !default;
 
-// Border Radiues
+// Border Radius
 $border-radius: 0.25rem !default;
 
 $action-transition-duration: 0.2s;
@@ -145,13 +140,15 @@ $action-transition-timing-function: ease;
 // Font, line-height, and color for body text, headings, and more.
 
 // Font family
-$font-family-sans-serif: 'Archivo', sans-serif !default;
+$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+  'Helvetica Neue', sans-serif !default;
 
 $font-size-base: 0.875rem !default; // 14px
 $font-size-lg: 1rem !default; // 16px
 $font-size-sm: 0.812rem !default; // 13px
 
-$font-weight-lighter: lighter !default;
+$font-weight-lighter: 200 !default;
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
 $font-weight-bold: 500 !default;
@@ -168,7 +165,6 @@ $h4-font-size: 1.25rem !default;
 $h5-font-size: 1rem !default;
 $h6-font-size: $font-size-base !default;
 
-$headings-margin-bottom: 0 !default;
 $headings-font-weight: 500 !default;
 
 $hr-opacity: 0.1 !default;
