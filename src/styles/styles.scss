@@ -13,8 +13,8 @@ $gray-600: #7987a1 !default;
 $gray-700: #495057 !default;
 $gray-800: #212a3a !default;
 $gray-900: #060c17 !default;
-$black: #000 !default;
-$text-muted: $gray-600 !default;
+$black: #1b254a !default;
+$text-muted: #a3aed0 !default;
 
 // Bootstrap custom colors
 $blue: #0d6efd !default;
@@ -30,14 +30,14 @@ $cyan: #0dcaf0 !default;
 
 // --- Bootstrap Theme Colors --- //
 //
-$primary: #000 !default;
-$secondary: $gray-600 !default;
-$success: #05a34a !default;
-$info: #66d1d1 !default;
-$warning: #fbbc06 !default;
-$danger: #ff3366 !default;
-$light: $gray-200 !default;
-$dark: $gray-900 !default;
+$primary: #422afb !default;
+$secondary: #f5f7fe !default;
+$success: #28C55D !default;
+$info: #83D9F6 !default;
+$warning: #f87316 !default;
+$danger: #f53a39 !default;
+$light: #a3aed0 !default;
+$dark: #1b254a !default;
 //
 // --- Bootstrap Theme Colors --- //
 
@@ -110,8 +110,8 @@ $position-values: (
 // Body
 //
 // Settings for the `<body>` element.
-$body-bg: #f9fafb !default;
-$body-color: $black !default;
+$body-bg: #ecf0f9 !default;
+$body-color: #1b254a !default;
 
 // Links
 //
