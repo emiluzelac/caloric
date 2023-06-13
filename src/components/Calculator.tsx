@@ -258,10 +258,7 @@ const Calculator: React.FC = () => {
       </div>
       {showResults && (
         <div id="resultsSection" className="my-5">
-          <button
-            className="btn btn-light my-4 py-1"
-            onClick={resetCalculator}
-          >
+          <button className="btn btn-light my-4 py-1" onClick={resetCalculator}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="me-2"
@@ -373,67 +370,69 @@ const Calculator: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="mt-5">
-            <h2>BMI Calculation</h2>
-            <p>Your Body Mass Index (BMI) is {bmi}.</p>
-            <span className="text-muted">
-              BMI = weight (kg) / (height (m))^2
-            </span>
-            <div className="progress">
-              <div
-                className="progress-bar"
-                role="progressbar"
-                aria-label="BMI"
-                aria-valuenow={parseFloat(bmi)}
-                aria-valuemin={0}
-                aria-valuemax={30}
-                style={{
-                  background: getBMIStatusColor(),
-                  width: `${parseFloat(bmi) * (100 / 30)}%`,
-                  transition: 'width 0.5s, background-color 0.5s',
-                }}
-              >
-                <span className="sr-only">{parseFloat(bmi)}%</span>
+          <div className="card mt-5">
+            <div className="card-body">
+              <h2 className="card-title">BMI Score</h2>
+              <p className='card-text'>Your Body Mass Index (BMI) is {bmi}.</p>
+              <span className="text-muted">
+                BMI = weight (kg) / (height (m))^2
+              </span>
+              <div className="progress">
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  aria-label="BMI"
+                  aria-valuenow={parseFloat(bmi)}
+                  aria-valuemin={0}
+                  aria-valuemax={30}
+                  style={{
+                    background: getBMIStatusColor(),
+                    width: `${parseFloat(bmi) * (100 / 30)}%`,
+                    transition: 'width 0.5s, background-color 0.5s',
+                  }}
+                >
+                  <span className="sr-only">{parseFloat(bmi)}%</span>
+                </div>
               </div>
-            </div>
 
-            <div className="d-flex justify-content-evenly gap-2 mb-2">
-              <span
-                className={
-                  parseFloat(bmi) < 18.5
-                    ? 'badge bg-primary-subtle text-primary-emphasis rounded-pill'
-                    : ''
-                }
-              >
-                Underweight
-              </span>
-              <span
-                className={
-                  parseFloat(bmi) >= 18.5 && parseFloat(bmi) < 25
-                    ? 'badge bg-success-subtle text-success-emphasis rounded-pill'
-                    : ''
-                }
-              >
-                Normal
-              </span>
-              <span
-                className={
-                  parseFloat(bmi) >= 25 && parseFloat(bmi) < 30
-                    ? 'badge bg-warning-subtle text-warning-emphasis rounded-pill'
-                    : ''
-                }
-              >
-                Overweight
-              </span>
-              <span
-                className={
-                  parseFloat(bmi) >= 30
-                    ? 'badge bg-danger-subtle text-danger-emphasis rounded-pill'
-                    : ''
-                }
-              >
-                Obesity
-              </span>
+              <div className="d-flex justify-content-evenly gap-2 mb-2">
+                <span
+                  className={
+                    parseFloat(bmi) < 18.5
+                      ? 'badge bg-primary-subtle text-primary-emphasis rounded-pill'
+                      : ''
+                  }
+                >
+                  Underweight
+                </span>
+                <span
+                  className={
+                    parseFloat(bmi) >= 18.5 && parseFloat(bmi) < 25
+                      ? 'badge bg-success-subtle text-success-emphasis rounded-pill'
+                      : ''
+                  }
+                >
+                  Normal
+                </span>
+                <span
+                  className={
+                    parseFloat(bmi) >= 25 && parseFloat(bmi) < 30
+                      ? 'badge bg-warning-subtle text-warning-emphasis rounded-pill'
+                      : ''
+                  }
+                >
+                  Overweight
+                </span>
+                <span
+                  className={
+                    parseFloat(bmi) >= 30
+                      ? 'badge bg-danger-subtle text-danger-emphasis rounded-pill'
+                      : ''
+                  }
+                >
+                  Obesity
+                </span>
+              </div>
             </div>
           </div>
         </div>
