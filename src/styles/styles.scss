@@ -277,7 +277,7 @@ $card-border-color: #666 !default;
 $card-cap-padding-y: 0.875rem !default;
 $card-cap-padding-x: $card-spacer-x !default;
 $card-cap-bg: rgba($black, 0.01) !default;
-$card-bg: var(--#{$prefix}body-bg) !default;
+$card-bg: #fff !default;
 
 // Accordion
 $accordion-bg: $white !default;
