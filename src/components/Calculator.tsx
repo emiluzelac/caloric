@@ -115,7 +115,7 @@ const Calculator: React.FC = () => {
     <>
       <div
         id="formSection"
-        className="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary"
+        className="p-4 p-md-5 mb-4 rounded text-body-emphasis card"
         style={{ display: showResults ? 'none' : 'block' }}
       >
         <div className="col">
@@ -249,7 +249,7 @@ const Calculator: React.FC = () => {
             ))}
           </div>
           <button
-            className="btn btn-primary w-100 my-2 py-2"
+            className="btn btn-primary w-100 my-4 py-2"
             onClick={calculate}
           >
             Calculate
@@ -259,7 +259,7 @@ const Calculator: React.FC = () => {
       {showResults && (
         <div id="resultsSection" className="my-5">
           <button
-            className="btn btn-primary my-2 py-1"
+            className="btn btn-light my-4 py-1"
             onClick={resetCalculator}
           >
             <svg
@@ -397,7 +397,7 @@ const Calculator: React.FC = () => {
               </div>
             </div>
 
-            <div className="d-flex justify-content-evenly gap-2">
+            <div className="d-flex justify-content-evenly gap-2 mb-2">
               <span
                 className={
                   parseFloat(bmi) < 18.5
