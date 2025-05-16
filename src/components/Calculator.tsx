@@ -13,6 +13,7 @@ const Calculator: React.FC = () => {
   const [weightLoss, setWeightLoss] = useState('')
   const [weightGain, setWeightGain] = useState('')
   const [bmi, setBmi] = useState('')
+  const [ffm, setFfm] = useState('')
   const [showResults, setShowResults] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
 
@@ -21,60 +22,65 @@ const Calculator: React.FC = () => {
       const heightCm = (parseInt(heightFt) * 12 + parseInt(heightIn)) * 2.54
       const weightKg = parseFloat(weightLbs) * 0.453592
 
-      let pavlidouResult
-
+      // Estimate FFM
+      let estimatedFFM = 0
       if (sex === 'male') {
-        pavlidouResult =
-          9.65 * weightKg + 573 * (heightCm / 100) - 5.08 * parseInt(age) + 260
+        estimatedFFM = 0.407 * weightKg + 0.267 * heightCm - 19.2
       } else {
-        pavlidouResult =
-          7.38 * weightKg + 607 * (heightCm / 100) - 2.31 * parseInt(age) + 43
+        estimatedFFM = 0.252 * weightKg + 0.473 * heightCm - 48.3
       }
 
-      const caloricIntakeResult = pavlidouResult * parseFloat(activityLevel)
+      // Calculate REE (RMR)
+      let ree = 0
+      if (sex === 'male') {
+        ree = 23.69 * estimatedFFM + 372.7
+      } else {
+        ree = 21.6 * estimatedFFM + 371.2
+      }
 
-      const rmrResult = pavlidouResult.toFixed(0)
-      const maintenanceResult = caloricIntakeResult.toFixed(0)
-      const weightLossResult = (caloricIntakeResult - 500).toFixed(0)
-      const weightGainResult = (caloricIntakeResult + 500).toFixed(0)
+      const activityMultiplier = parseFloat(activityLevel)
+      const tdee = ree * activityMultiplier
 
-      setRmr(rmrResult)
-      setMaintenance(maintenanceResult)
-      setWeightLoss(weightLossResult)
-      setWeightGain(weightGainResult)
+      setFfm(estimatedFFM.toFixed(1))
+      setRmr(ree.toFixed(0))
+      setMaintenance(tdee.toFixed(0))
+      setWeightLoss((tdee - 500).toFixed(0))
+      setWeightGain((tdee + 500).toFixed(0))
       setBmi(calculateBMI())
       setShowResults(true)
     }
+
     setFormSubmitted(true)
   }
 
-  const isInvalid = (value: string) => {
-    return formSubmitted && (!value || value.trim() === '')
+  const calculateBMI = () => {
+    const heightM = ((parseInt(heightFt) * 12 + parseInt(heightIn)) * 2.54) / 100
+    const weightKg = parseFloat(weightLbs) * 0.453592
+    const bmi = (weightKg / (heightM * heightM)).toFixed(2)
+    return bmi
   }
 
   const getActivityLevelName = (value: string) => {
     switch (value) {
-      case '1.2':
-        return 'sedentary'
-      case '1.375':
-        return 'lightly active'
-      case '1.55':
-        return 'moderately active'
-      case '1.725':
-        return 'very active'
-      case '1.9':
-        return 'extra active'
-      default:
-        return 'sedentary'
+      case '1.2': return 'sedentary'
+      case '1.375': return 'lightly active'
+      case '1.55': return 'moderately active'
+      case '1.725': return 'very active'
+      case '1.9': return 'extra active'
+      default: return 'sedentary'
     }
   }
 
-  const calculateBMI = () => {
-    const heightM =
-      ((parseInt(heightFt) * 12 + parseInt(heightIn)) * 2.54) / 100
-    const weightKg = parseFloat(weightLbs) * 0.453592
-    const bmi = (weightKg / (heightM * heightM)).toFixed(2)
-    return bmi
+  const getBMIStatusColor = () => {
+    const bmiValue = parseFloat(bmi)
+    if (bmiValue < 18.5) return 'linear-gradient(to right, #007bff, #28a745)'
+    if (bmiValue < 25) return 'linear-gradient(to right, #28a745, #ffc107)'
+    if (bmiValue < 30) return 'linear-gradient(to right, #ffc107, #dc3545)'
+    return 'linear-gradient(to right, #dc3545, #9c27b0)'
+  }
+
+  const isInvalid = (value: string) => {
+    return formSubmitted && (!value || value.trim() === '')
   }
 
   const resetCalculator = () => {
@@ -89,349 +95,113 @@ const Calculator: React.FC = () => {
     setMaintenance('')
     setWeightLoss('')
     setWeightGain('')
+    setFfm('')
     setBmi('')
     setShowResults(false)
     setFormSubmitted(false)
   }
 
-  const getBMIStatusColor = () => {
-    const bmiValue = parseFloat(bmi)
-    let gradientColor
-
-    if (bmiValue < 18.5) {
-      gradientColor = 'linear-gradient(to right, #007bff, #28a745)'
-    } else if (bmiValue < 25) {
-      gradientColor = 'linear-gradient(to right, #28a745, #ffc107)'
-    } else if (bmiValue < 30) {
-      gradientColor = 'linear-gradient(to right, #ffc107, #dc3545)'
-    } else {
-      gradientColor = 'linear-gradient(to right, #dc3545, #9c27b0)'
-    }
-
-    return gradientColor
-  }
-
   return (
     <>
-      <div
-        id="formSection"
-        className="p-4 p-md-5 mb-4 rounded text-body-emphasis card"
-        style={{ display: showResults ? 'none' : 'block' }}
-      >
-        <div className="col">
-          <h2 className="fs-3 text-body-emphasis">Calorie Calculator</h2>
-          <p>
-            This TDEE calorie calculator improves the Harris-Benedict equations
-            by creating and validating new equations to estimate resting
-            metabolic rate (RMR) in adults of various weights using the same
-            anthropometric factors.
-          </p>
+      <div id="formSection" className="p-4 p-md-5 mb-4 card" style={{ display: showResults ? 'none' : 'block' }}>
+        <h2 className="fs-3">Calorie Calculator</h2>
+        <p>This calculator uses estimated lean mass for a more accurate metabolic rate.</p>
 
-          <div className="form-floating mb-3">
-            <select
-              id="sex"
-              className={`form-select ${isInvalid(sex) ? 'is-invalid' : ''}`}
-              aria-label="Select"
-              value={sex}
-              onChange={(e) => setSex(e.target.value)}
-              required
-            >
-              <option value="">Choose...</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-            <label htmlFor="sex">Gender</label>
+        <div className="form-floating mb-3">
+          <select id="sex" className={`form-select ${isInvalid(sex) ? 'is-invalid' : ''}`} value={sex} onChange={(e) => setSex(e.target.value)} required>
+            <option value="">Choose...</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <label htmlFor="sex">Gender</label>
+        </div>
+
+        <div className="form-floating mb-3">
+          <input type="number" id="age" className={`form-control ${isInvalid(age) ? 'is-invalid' : ''}`} value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" required />
+          <label htmlFor="age">Age</label>
+        </div>
+
+        <div className="form-floating mb-3">
+          <input type="number" id="heightFt" className={`form-control ${isInvalid(heightFt) ? 'is-invalid' : ''}`} value={heightFt} onChange={(e) => setHeightFt(e.target.value)} placeholder="Height (ft)" required />
+          <label htmlFor="heightFt">Height (ft)</label>
+        </div>
+
+        <div className="form-floating mb-3">
+          <input type="number" id="heightIn" className={`form-control ${isInvalid(heightIn) ? 'is-invalid' : ''}`} value={heightIn} onChange={(e) => setHeightIn(e.target.value)} placeholder="Height (in)" required />
+          <label htmlFor="heightIn">Height (in)</label>
+        </div>
+
+        <div className="form-floating mb-3">
+          <input type="number" id="weightLbs" className={`form-control ${isInvalid(weightLbs) ? 'is-invalid' : ''}`} value={weightLbs} onChange={(e) => setWeightLbs(e.target.value)} placeholder="Weight (lbs)" required />
+          <label htmlFor="weightLbs">Weight (lbs)</label>
+        </div>
+
+        <h3 className="fs-5">Activity Level</h3>
+        {[
+          { value: '1.2', label: 'Sedentary (little or no exercise)' },
+          { value: '1.375', label: 'Lightly active (1–3 days/week)' },
+          { value: '1.55', label: 'Moderately active (3–5 days/week)' },
+          { value: '1.725', label: 'Very active (6–7 days/week)' },
+          { value: '1.9', label: 'Extra active (physical job or 2x training)' },
+        ].map((opt) => (
+          <div className="form-check" key={opt.value}>
+            <input type="radio" id={opt.value} name="activityLevel" value={opt.value} checked={activityLevel === opt.value} onChange={() => {
+              setActivityLevel(opt.value)
+              setSelectedActivityLevel(opt.value)
+            }} className="form-check-input" />
+            <label htmlFor={opt.value} className="form-check-label">{opt.label}</label>
           </div>
+        ))}
 
-          <div className="form-floating mb-3">
-            <input
-              type="number"
-              id="age"
-              className={`form-control ${isInvalid(age) ? 'is-invalid' : ''}`}
-              placeholder="Age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              pattern="[0-9]*"
-              required
-            />
-            <label htmlFor="age">Age</label>
-          </div>
+        <button className="btn btn-primary w-100 my-4 py-2" onClick={calculate}>Calculate</button>
+      </div>
 
-          <div className="form-floating mb-3">
-            <input
-              type="number"
-              id="heightFt"
-              className={`form-control ${
-                isInvalid(heightFt) ? 'is-invalid' : ''
-              }`}
-              placeholder="Height (ft)"
-              value={heightFt}
-              onChange={(e) => setHeightFt(e.target.value)}
-              pattern="[0-9]*"
-              required
-            />
-            <label htmlFor="heightFt">Height (ft)</label>
-          </div>
+      {showResults && (
+        <div id="resultsSection" className="my-5">
+          <button className="btn btn-light my-4 py-1" onClick={resetCalculator}>Start Over</button>
 
-          <div className="form-floating mb-3">
-            <input
-              type="number"
-              id="heightIn"
-              className={`form-control ${
-                isInvalid(heightIn) ? 'is-invalid' : ''
-              }`}
-              placeholder="Height (in)"
-              value={heightIn}
-              onChange={(e) => setHeightIn(e.target.value)}
-              pattern="[0-9]*"
-              required
-            />
-            <label htmlFor="heightIn">Height (in)</label>
-          </div>
+          <p className="lead">Your results for <strong>{getActivityLevelName(selectedActivityLevel)}</strong> activity level:</p>
 
-          <div className="form-floating mb-3">
-            <input
-              type="number"
-              id="weightLbs"
-              className={`form-control ${
-                isInvalid(weightLbs) ? 'is-invalid' : ''
-              }`}
-              placeholder="Weight (lbs)"
-              value={weightLbs}
-              onChange={(e) => setWeightLbs(e.target.value)}
-              pattern="[0-9]*"
-              required
-            />
-            <label htmlFor="weightLbs">Weight (lbs)</label>
-          </div>
-
-          <div className="col">
-            <h3 className="fs-3 text-body-emphasis mb-3">Activity Level</h3>
+          <div className="row row-cols-1 row-cols-md-2 g-4">
             {[
-              { value: '1.2', label: 'Sedentary (little or no exercise)' },
-              {
-                value: '1.375',
-                label: 'Lightly active (light exercise/sports 1-3 days/week)',
-              },
-              {
-                value: '1.55',
-                label:
-                  'Moderately active (moderate exercise/sports 3-5 days/week)',
-              },
-              {
-                value: '1.725',
-                label: 'Very active (hard exercise/sports 6-7 days a week)',
-              },
-              {
-                value: '1.9',
-                label:
-                  'Extra active (very hard exercise/sports & physical job or 2x training)',
-              },
-            ].map((option) => (
-              <div className="form-check" key={option.value}>
-                <input
-                  type="radio"
-                  id={option.value}
-                  name="activityLevel"
-                  value={option.value}
-                  checked={activityLevel === option.value}
-                  onChange={() => {
-                    setActivityLevel(option.value)
-                    setSelectedActivityLevel(option.value)
-                  }}
-                  className="form-check-input"
-                  required
-                />
-                <label htmlFor={option.value} className="form-check-label">
-                  {option.label}
-                </label>
+              { title: 'RMR', value: rmr, desc: 'Calories to maintain basic body functions at rest.', foot: 'Resting Metabolic Rate' },
+              { title: 'Maintenance', value: maintenance, desc: 'Calories to maintain current weight.', foot: 'Caloric Balance' },
+              { title: 'Weight Loss', value: weightLoss, desc: 'Calories to promote weight loss.', foot: 'Caloric Deficit' },
+              { title: 'Weight Gain', value: weightGain, desc: 'Calories to support weight gain.', foot: 'Caloric Surplus' },
+              { title: 'Lean Mass', value: ffm + ' kg', desc: 'Estimated fat-free body mass.', foot: 'Fat-Free Mass (FFM)' },
+            ].map(({ title, value, desc, foot }) => (
+              <div className="col" key={title}>
+                <div className="card h-100">
+                  <div className="card-header"><h4>{title}</h4></div>
+                  <div className="card-body">
+                    <h1 className="card-title">{value}<small className="fw-light"> /day</small></h1>
+                    <p className="card-text">{desc}</p>
+                  </div>
+                  <div className="card-footer">
+                    <small className="text-muted">{foot}</small>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-          <button
-            className="btn btn-primary w-100 my-4 py-2"
-            onClick={calculate}
-          >
-            Calculate
-          </button>
-        </div>
-      </div>
-      {showResults && (
-        <div id="resultsSection" className="my-5">
-          <button className="btn btn-light my-4 py-1" onClick={resetCalculator}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="me-2"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              strokeWidth="1"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M9 4.55a8 8 0 0 1 6 14.9m0 -4.45v5h5"></path>
-              <path d="M5.63 7.16l0 .01"></path>
-              <path d="M4.06 11l0 .01"></path>
-              <path d="M4.63 15.1l0 .01"></path>
-              <path d="M7.16 18.37l0 .01"></path>
-              <path d="M11 19.94l0 .01"></path>
-            </svg>
-            Start Over
-          </button>
-          <div className="mb-3">
-            <h5>Results</h5>
-            <p className="lead">
-              Your results for {getActivityLevelName(selectedActivityLevel)}{' '}
-              activity level:
-            </p>
-          </div>
-          <div className="row row-cols-1 row-cols-md-2 g-4">
-            <div className="col">
-              <div className="card h-100">
-                <div className="card-header">
-                  <h4 className="my-0 fw-normal">RMR</h4>
-                </div>
-                <div className="card-body">
-                  <h1 className="card-title">
-                    {rmr}
-                    <small className="fw-light"> /day</small>
-                  </h1>
-                  <p className="card-text">
-                    Number of daily calories required to maintain your body's
-                    basic functions at rest.
-                  </p>
-                </div>
-                <div className="card-footer">
-                  <small className="text-body-secondary">
-                    Resting Metabolic Rate
-                  </small>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card h-100">
-                <div className="card-header">
-                  <h4 className="my-0 fw-normal">Maintenance</h4>
-                </div>
-                <div className="card-body">
-                  <h1 className="card-title">
-                    {maintenance}
-                    <small className="fw-light"> /day</small>
-                  </h1>
-                  <p className="card-text">
-                    Number of daily calories that will enable you to maintain
-                    your current weight.
-                  </p>
-                </div>
-                <div className="card-footer">
-                  <small className="text-body-secondary">Caloric Balance</small>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card h-100">
-                <div className="card-header">
-                  <h4 className="my-0 fw-normal">Weight Loss</h4>
-                </div>
-                <div className="card-body">
-                  <h1 className="card-title">
-                    {weightLoss}
-                    <small className="fw-light"> /day</small>
-                  </h1>
-                  <p className="card-text">
-                    Number of daily calories to consume for weight loss.
-                  </p>
-                </div>
-                <div className="card-footer">
-                  <small className="text-body-secondary">Caloric Deficit</small>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card h-100">
-                <div className="card-header">
-                  <h4 className="my-0 fw-normal">Weight Gain</h4>
-                </div>
-                <div className="card-body">
-                  <h1 className="card-title">
-                    {weightGain}
-                    <small className="fw-light"> /day</small>
-                  </h1>
-                  <p className="card-text">
-                    Number of daily calories to consume for weight gain.
-                  </p>
-                </div>
-                <div className="card-footer">
-                  <small className="text-body-secondary">Caloric Surplus</small>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className="card mt-5">
             <div className="card-body">
               <h2 className="card-title">BMI Score</h2>
-              <p className='card-text'>Your Body Mass Index (BMI) is {bmi}.</p>
-              <span className="text-muted">
-                BMI = weight (kg) / (height (m))^2
-              </span>
-              <div className="progress">
-                <div
-                  className="progress-bar"
-                  role="progressbar"
-                  aria-label="BMI"
-                  aria-valuenow={parseFloat(bmi)}
-                  aria-valuemin={0}
-                  aria-valuemax={30}
-                  style={{
-                    background: getBMIStatusColor(),
-                    width: `${parseFloat(bmi) * (100 / 30)}%`,
-                    transition: 'width 0.5s, background-color 0.5s',
-                  }}
-                >
-                  <span className="sr-only">{parseFloat(bmi)}%</span>
-                </div>
+              <p className="card-text">Your Body Mass Index (BMI) is {bmi}</p>
+              <span className="text-muted">BMI = weight (kg) / height (m)²</span>
+              <div className="progress my-3">
+                <div className="progress-bar" style={{
+                  background: getBMIStatusColor(),
+                  width: `${parseFloat(bmi) * (100 / 30)}%`,
+                  transition: 'width 0.5s'
+                }} role="progressbar" />
               </div>
-
-              <div className="d-flex justify-content-evenly gap-2 mb-2">
-                <span
-                  className={
-                    parseFloat(bmi) < 18.5
-                      ? 'badge bg-primary-subtle text-primary-emphasis rounded-pill'
-                      : ''
-                  }
-                >
-                  Underweight
-                </span>
-                <span
-                  className={
-                    parseFloat(bmi) >= 18.5 && parseFloat(bmi) < 25
-                      ? 'badge bg-success-subtle text-success-emphasis rounded-pill'
-                      : ''
-                  }
-                >
-                  Normal
-                </span>
-                <span
-                  className={
-                    parseFloat(bmi) >= 25 && parseFloat(bmi) < 30
-                      ? 'badge bg-warning-subtle text-warning-emphasis rounded-pill'
-                      : ''
-                  }
-                >
-                  Overweight
-                </span>
-                <span
-                  className={
-                    parseFloat(bmi) >= 30
-                      ? 'badge bg-danger-subtle text-danger-emphasis rounded-pill'
-                      : ''
-                  }
-                >
-                  Obesity
-                </span>
+              <div className="d-flex justify-content-between">
+                <span className="badge text-bg-primary">Underweight</span>
+                <span className="badge text-bg-success">Normal</span>
+                <span className="badge text-bg-warning">Overweight</span>
+                <span className="badge text-bg-danger">Obesity</span>
               </div>
             </div>
           </div>
