@@ -20,9 +20,11 @@ const Calculator: React.FC = () => {
   const calculate = () => {
     if (sex && age && heightFt && heightIn && weightLbs) {
       const heightCm = (parseInt(heightFt) * 12 + parseInt(heightIn)) * 2.54;
+      const heightM = heightCm / 100;
       const weightKg = parseFloat(weightLbs) * 0.453592;
+      const ageYears = parseInt(age);
 
-      // Estimate FFM
+      // Estimate FFM (informational only; not used in the RMR calculation)
       let estimatedFFM = 0;
       if (sex === "male") {
         estimatedFFM = 0.407 * weightKg + 0.267 * heightCm - 19.2;
@@ -30,12 +32,12 @@ const Calculator: React.FC = () => {
         estimatedFFM = 0.252 * weightKg + 0.473 * heightCm - 48.3;
       }
 
-      // Calculate REE (RMR)
+      // Calculate RMR using the Pavlidou (2023) revised Harris-Benedict equation
       let ree = 0;
       if (sex === "male") {
-        ree = 23.69 * estimatedFFM + 372.7;
+        ree = 9.65 * weightKg + 573 * heightM - 5.08 * ageYears + 260;
       } else {
-        ree = 21.6 * estimatedFFM + 371.2;
+        ree = 7.38 * weightKg + 607 * heightM - 2.31 * ageYears + 43;
       }
 
       const activityMultiplier = parseFloat(activityLevel);
@@ -117,8 +119,8 @@ const Calculator: React.FC = () => {
       >
         <h2 className="fs-3">Calorie Calculator</h2>
         <p>
-          This calculator uses estimated lean mass for a more accurate metabolic
-          rate.
+          This calculator estimates your resting metabolic rate using the
+          Pavlidou (2023) revised Harris-Benedict equation.
         </p>
 
         <div className="form-floating mb-3">
