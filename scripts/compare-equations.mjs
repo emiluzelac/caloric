@@ -1,54 +1,11 @@
-// RMR equation comparison harness.
+// RMR equation AGREEMENT harness (no ground-truth data needed).
 // Run: node scripts/compare-equations.mjs
 //
-// Compares the RMR estimates produced by:
-//   - Pavlidou (2023) revised Harris-Benedict  <-- now used by the app
-//   - The previous FFM-based model             <-- old app behavior
-//   - Mifflin-St Jeor (1990)
-//   - Harris-Benedict (revised 1984)
-//
-// Inputs use the same units the UI collects (ft/in, lbs) and convert internally.
+// Shows how far the equations diverge across sample profiles. This measures
+// agreement only -- NOT accuracy. For accuracy vs measured RMR, use
+// scripts/validate-accuracy.mjs with real indirect-calorimetry data.
 
-const LB_TO_KG = 0.453592;
-const IN_TO_CM = 2.54;
-
-function toMetric({ ft, inch, lbs }) {
-  const heightCm = (ft * 12 + inch) * IN_TO_CM;
-  return {
-    heightCm,
-    heightM: heightCm / 100,
-    weightKg: lbs * LB_TO_KG,
-  };
-}
-
-function pavlidou({ sex, ft, inch, lbs, age }) {
-  const { heightM, weightKg } = toMetric({ ft, inch, lbs });
-  return sex === "male"
-    ? 9.65 * weightKg + 573 * heightM - 5.08 * age + 260
-    : 7.38 * weightKg + 607 * heightM - 2.31 * age + 43;
-}
-
-function oldFfmModel({ sex, ft, inch, lbs }) {
-  const { heightCm, weightKg } = toMetric({ ft, inch, lbs });
-  const ffm =
-    sex === "male"
-      ? 0.407 * weightKg + 0.267 * heightCm - 19.2
-      : 0.252 * weightKg + 0.473 * heightCm - 48.3;
-  return sex === "male" ? 23.69 * ffm + 372.7 : 21.6 * ffm + 371.2;
-}
-
-function mifflin({ sex, ft, inch, lbs, age }) {
-  const { heightCm, weightKg } = toMetric({ ft, inch, lbs });
-  const base = 10 * weightKg + 6.25 * heightCm - 5 * age;
-  return sex === "male" ? base + 5 : base - 161;
-}
-
-function harrisBenedict({ sex, ft, inch, lbs, age }) {
-  const { heightCm, weightKg } = toMetric({ ft, inch, lbs });
-  return sex === "male"
-    ? 88.362 + 13.397 * weightKg + 4.799 * heightCm - 5.677 * age
-    : 447.593 + 9.247 * weightKg + 3.098 * heightCm - 4.33 * age;
-}
+import { EQUATIONS, fromImperial } from "./equations.mjs";
 
 const profiles = [
   { label: "M 25y 5'11\" 176lb", sex: "male", ft: 5, inch: 11, lbs: 176, age: 25 },
@@ -59,37 +16,22 @@ const profiles = [
   { label: "F 65y 5'3\" 150lb", sex: "female", ft: 5, inch: 3, lbs: 150, age: 65 },
 ];
 
-const fmt = (n) => String(Math.round(n)).padStart(5);
+const names = Object.keys(EQUATIONS);
+const fmt = (n) => String(Math.round(n)).padStart(8);
 
 console.log(
-  [
-    "Profile".padEnd(22),
-    "Pavlidou".padStart(8),
-    "OldFFM".padStart(8),
-    "Mifflin".padStart(8),
-    "Harris".padStart(8),
-    "Δ vs Mifflin".padStart(13),
-  ].join(" ")
+  ["Profile".padEnd(22), ...names.map((n) => n.padStart(8))].join(" ")
 );
-console.log("-".repeat(72));
+console.log("-".repeat(22 + names.length * 9));
 
 for (const p of profiles) {
-  const pav = pavlidou(p);
-  const old = oldFfmModel(p);
-  const mif = mifflin(p);
-  const hb = harrisBenedict(p);
-  console.log(
-    [
-      p.label.padEnd(22),
-      fmt(pav),
-      fmt(old),
-      fmt(mif),
-      fmt(hb),
-      `${(pav - mif >= 0 ? "+" : "")}${Math.round(pav - mif)}`.padStart(13),
-    ].join(" ")
-  );
+  const input = {
+    sex: p.sex,
+    ageYears: p.age,
+    ...fromImperial({ ft: p.ft, inch: p.inch, lbs: p.lbs }),
+  };
+  const row = names.map((n) => fmt(EQUATIONS[n](input)));
+  console.log([p.label.padEnd(22), ...row].join(" "));
 }
 
-console.log(
-  "\nAll values are RMR in kcal/day. The app now uses the Pavlidou column."
-);
+console.log("\nValues are RMR kcal/day. Agreement only -- not accuracy.");

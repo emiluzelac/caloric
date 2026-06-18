@@ -1,0 +1,14 @@
+# EXAMPLE FORMAT ONLY -- these are synthetic/illustrative values, NOT real
+# indirect-calorimetry measurements. Replace every row with real data before
+# trusting any accuracy numbers. Columns: sex,age,height_cm,weight_kg,measured_rmr
+sex,age,height_cm,weight_kg,measured_rmr
+male,25,180,80,1810
+male,45,180,91,1790
+male,65,175,86,1650
+female,25,165,65,1390
+female,45,163,73,1360
+female,65,160,68,1210
+male,33,178,95,1950
+female,38,170,82,1520
+male,52,172,78,1600
+female,29,158,55,1280
