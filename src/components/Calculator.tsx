@@ -1,6 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+type CalcInputs = {
+  sex: string;
+  age: string;
+  heightFt: string;
+  heightIn: string;
+  weightLbs: string;
+  activityLevel: string;
+};
+
+type CalcResults = {
+  ffm: string;
+  rmr: string;
+  maintenance: string;
+  weightLoss: string;
+  weightGain: string;
+  bmi: string;
+};
+
+const computeResults = (i: CalcInputs): CalcResults | null => {
+  if (!(i.sex && i.age && i.heightFt && i.heightIn && i.weightLbs)) return null;
+
+  const heightCm = (parseInt(i.heightFt) * 12 + parseInt(i.heightIn)) * 2.54;
+  const heightM = heightCm / 100;
+  const weightKg = parseFloat(i.weightLbs) * 0.453592;
+  const ageYears = parseInt(i.age);
+
+  // Estimate FFM (informational only; not used in the RMR calculation)
+  let estimatedFFM = 0;
+  if (i.sex === "male") {
+    estimatedFFM = 0.407 * weightKg + 0.267 * heightCm - 19.2;
+  } else {
+    estimatedFFM = 0.252 * weightKg + 0.473 * heightCm - 48.3;
+  }
+
+  // Calculate RMR using the Pavlidou (2023) revised Harris-Benedict equation
+  let ree = 0;
+  if (i.sex === "male") {
+    ree = 9.65 * weightKg + 573 * heightM - 5.08 * ageYears + 260;
+  } else {
+    ree = 7.38 * weightKg + 607 * heightM - 2.31 * ageYears + 43;
+  }
+
+  const tdee = ree * parseFloat(i.activityLevel);
+
+  return {
+    ffm: estimatedFFM.toFixed(1),
+    rmr: ree.toFixed(0),
+    maintenance: tdee.toFixed(0),
+    weightLoss: (tdee - 500).toFixed(0),
+    weightGain: (tdee + 500).toFixed(0),
+    bmi: (weightKg / (heightM * heightM)).toFixed(2),
+  };
+};
+
+const generateCalcId = () =>
+  Date.now().toString(36).slice(-4) + Math.random().toString(36).slice(2, 6);
 
 const Calculator: React.FC = () => {
+  const router = useRouter();
   const [sex, setSex] = useState("");
   const [age, setAge] = useState("");
   const [heightFt, setHeightFt] = useState("");
@@ -8,6 +67,7 @@ const Calculator: React.FC = () => {
   const [weightLbs, setWeightLbs] = useState("");
   const [activityLevel, setActivityLevel] = useState("1.2");
   const [selectedActivityLevel, setSelectedActivityLevel] = useState("");
+  const [calcId, setCalcId] = useState("");
   const [rmr, setRmr] = useState("");
   const [maintenance, setMaintenance] = useState("");
   const [weightLoss, setWeightLoss] = useState("");
@@ -17,50 +77,88 @@ const Calculator: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  const applyResults = (r: CalcResults) => {
+    setFfm(r.ffm);
+    setRmr(r.rmr);
+    setMaintenance(r.maintenance);
+    setWeightLoss(r.weightLoss);
+    setWeightGain(r.weightGain);
+    setBmi(r.bmi);
+    setShowResults(true);
+  };
+
+  const syncUrl = (id: string, i: CalcInputs) => {
+    router.replace(
+      {
+        pathname: "/",
+        query: {
+          id,
+          sex: i.sex,
+          age: i.age,
+          ft: i.heightFt,
+          in: i.heightIn,
+          lbs: i.weightLbs,
+          act: i.activityLevel,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
+
+  // Restore a calculation from the URL (shareable/bookmarkable links).
+  useEffect(() => {
+    if (!router.isReady || showResults) return;
+    const q = router.query;
+    const str = (v: typeof q[string]) => (typeof v === "string" ? v : "");
+    const inputs: CalcInputs = {
+      sex: str(q.sex),
+      age: str(q.age),
+      heightFt: str(q.ft),
+      heightIn: str(q.in),
+      weightLbs: str(q.lbs),
+      activityLevel: str(q.act) || "1.2",
+    };
+    const r = computeResults(inputs);
+    if (r) {
+      setSex(inputs.sex);
+      setAge(inputs.age);
+      setHeightFt(inputs.heightFt);
+      setHeightIn(inputs.heightIn);
+      setWeightLbs(inputs.weightLbs);
+      setActivityLevel(inputs.activityLevel);
+      setSelectedActivityLevel(inputs.activityLevel);
+      setCalcId(str(q.id) || generateCalcId());
+      applyResults(r);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
+
+  const copyLink = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
   const calculate = () => {
-    if (sex && age && heightFt && heightIn && weightLbs) {
-      const heightCm = (parseInt(heightFt) * 12 + parseInt(heightIn)) * 2.54;
-      const heightM = heightCm / 100;
-      const weightKg = parseFloat(weightLbs) * 0.453592;
-      const ageYears = parseInt(age);
-
-      // Estimate FFM (informational only; not used in the RMR calculation)
-      let estimatedFFM = 0;
-      if (sex === "male") {
-        estimatedFFM = 0.407 * weightKg + 0.267 * heightCm - 19.2;
-      } else {
-        estimatedFFM = 0.252 * weightKg + 0.473 * heightCm - 48.3;
-      }
-
-      // Calculate RMR using the Pavlidou (2023) revised Harris-Benedict equation
-      let ree = 0;
-      if (sex === "male") {
-        ree = 9.65 * weightKg + 573 * heightM - 5.08 * ageYears + 260;
-      } else {
-        ree = 7.38 * weightKg + 607 * heightM - 2.31 * ageYears + 43;
-      }
-
-      const activityMultiplier = parseFloat(activityLevel);
-      const tdee = ree * activityMultiplier;
-
-      setFfm(estimatedFFM.toFixed(1));
-      setRmr(ree.toFixed(0));
-      setMaintenance(tdee.toFixed(0));
-      setWeightLoss((tdee - 500).toFixed(0));
-      setWeightGain((tdee + 500).toFixed(0));
-      setBmi(calculateBMI());
-      setShowResults(true);
+    const inputs: CalcInputs = {
+      sex,
+      age,
+      heightFt,
+      heightIn,
+      weightLbs,
+      activityLevel,
+    };
+    const r = computeResults(inputs);
+    if (r) {
+      const id = generateCalcId();
+      setCalcId(id);
+      setSelectedActivityLevel(activityLevel);
+      applyResults(r);
+      syncUrl(id, inputs);
     }
 
     setFormSubmitted(true);
-  };
-
-  const calculateBMI = () => {
-    const heightM =
-      ((parseInt(heightFt) * 12 + parseInt(heightIn)) * 2.54) / 100;
-    const weightKg = parseFloat(weightLbs) * 0.453592;
-    const bmi = (weightKg / (heightM * heightM)).toFixed(2);
-    return bmi;
   };
 
   const getActivityLevelName = (value: string) => {
@@ -100,6 +198,7 @@ const Calculator: React.FC = () => {
     setWeightLbs("");
     setActivityLevel("1.2");
     setSelectedActivityLevel("");
+    setCalcId("");
     setRmr("");
     setMaintenance("");
     setWeightLoss("");
@@ -108,6 +207,7 @@ const Calculator: React.FC = () => {
     setBmi("");
     setShowResults(false);
     setFormSubmitted(false);
+    router.replace("/", undefined, { shallow: true });
   };
 
   return (
@@ -236,6 +336,16 @@ const Calculator: React.FC = () => {
             <strong>{getActivityLevelName(selectedActivityLevel)}</strong>{" "}
             activity level:
           </p>
+
+          <div className="d-flex align-items-center gap-2 mb-4">
+            <span className="badge text-bg-secondary">ID: {calcId}</span>
+            <button
+              className="btn btn-sm btn-outline-secondary"
+              onClick={copyLink}
+            >
+              Copy link
+            </button>
+          </div>
 
           <div className="row row-cols-1 row-cols-md-2 g-4">
             {[
